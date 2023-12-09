@@ -44,8 +44,7 @@ async Task ToggleOn(CancellationToken cancellationToken)
   using var udpClient = new UdpClient();
   onState = (onState + 1) % 2;
   var turnCommand = new TurnCommandData(onState);
-  var goveeMessage = new GoveeMessage<TurnCommandData>(turnCommand);
-  var messageWrapper = new GoveeMessageWrapper<TurnCommandData>(goveeMessage);
+  var messageWrapper = new GoveeMessageWrapper<TurnCommandData>(turnCommand);
   var message = JsonConvert.SerializeObject(messageWrapper, jsonSerializerSettings);
   Console.WriteLine(message);
   var messageBytes = Encoding.UTF8.GetBytes(message);
@@ -95,8 +94,7 @@ var multicastListener = Task.Run(async () =>
   udpClient.JoinMulticastGroup(ipEndpoint, 25);
 
   RequestScanData requestScan = new();
-  var goveeMessage = new GoveeMessage<RequestScanData>(requestScan);
-  var requestScanWrapper = new GoveeMessageWrapper<RequestScanData>(goveeMessage);
+  var requestScanWrapper = new GoveeMessageWrapper<RequestScanData>(requestScan);
   string message = JsonConvert.SerializeObject(requestScanWrapper, jsonSerializerSettings);
   var messageBytes = Encoding.UTF8.GetBytes(message);
 
