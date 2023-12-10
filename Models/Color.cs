@@ -2,8 +2,7 @@ namespace nateisthename.Govee;
 
 public struct Color
 {
-  int R;
-  int G;
-  int B;
-
+  public int R;
+  public int G;
+  public int B;
 }

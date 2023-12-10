@@ -104,10 +104,10 @@ var multicastListener = Task.Run(async () =>
   Console.WriteLine($"Message sent to {multicastAddress}");
 });
 
-var onOffTask = Task.Run(async () =>
+var onOffTask = Task.Run(async () => await Task.Run(() =>
 {
   var cancellationTokenSource = new CancellationTokenSource();
   var repeatingTask = RepeatTaskEvery(() => ToggleOn(cancellationTokenSource.Token), TimeSpan.FromSeconds(5), cancellationTokenSource.Token);
-});
+}));
 
 await Task.WhenAll([multicastListener, udpListener, onOffTask]);
